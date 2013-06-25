@@ -121,13 +121,13 @@ COUNT16OZ = 0
 
 while (True):
 
-  if GPIO.input(18) != led_1:
+  if GPIO.input(18) != led1:
 
-    led_1 = GPIO.input(18)
-    brew_array.publish("led_1",1)
+    led1 = GPIO.input(18)
+    brew_array.publish("led_1", 1)
 
 
-  if GPIO.input(23) != led_2:
+  if GPIO.input(23) != led2:
 
-    led_2 = GPIO.input(23)
-    brew_array.publish("led_2",1)
+    led2 = GPIO.input(23)
+    brew_array.publish("led_2", 1)
