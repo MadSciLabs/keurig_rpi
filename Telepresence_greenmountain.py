@@ -45,10 +45,10 @@ brew_array = Spacebrew("keurig", server="spacebrew.madsci1.havasworldwide.com")
 
 #CREATE SUBSCRIBERS
 brew_array.addSubscriber("button_1","boolean")
-brew_array.addSubscriber("button_2","boolean")
+brew_array.addSubscriber("button_0","boolean")
 
 brew_array.addPublisher("led_1", "boolean")
-brew_array.addPublisher("led_2", "boolean")
+brew_array.addPublisher("led_0", "boolean")
 
 
 # =========================
@@ -64,13 +64,19 @@ def led_1(value):
   print value
 
 def button_0(value):
-  if value == 1:
+  print "button 0"
+  print value
+  if value == "true":
+    print "HIGH"
     GPIO.output(24, GPIO.HIGH)
-    time.sleep(.5)
+    time.sleep(1)
+    print "LOW"
     GPIO.output(24, GPIO.LOW)
  
 def button_1(value):
-  if value == 1:
+  print "button 1"
+  print value 
+  if value == true:
     GPIO.output(25, GPIO.HIGH)
     time.sleep(.5)
     GPIO.output(25, GPIO.LOW)
@@ -124,10 +130,12 @@ while (True):
   if GPIO.input(18) != led0:
 
     led0 = GPIO.input(18)
-    brew_array.publish("led_0", led1)
+    #print bool(led0)
+    brew_array.publish("led_0", ("false" if bool(led0) else "true"))
 
 
   if GPIO.input(23) != led1:
 
     led1 = GPIO.input(23)
-    brew_array.publish("led_1", led2)
+    #print bool(led1)
+    brew_array.publish("led_1", ("false" if bool(led1) else "true"))
