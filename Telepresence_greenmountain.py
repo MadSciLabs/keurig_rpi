@@ -21,7 +21,7 @@ print spacebrew_path
 from spacebrew import Spacebrew
 
 led1 = 0
-led2 = 0
+led0 = 0
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.IN)
@@ -55,21 +55,21 @@ brew_array.addPublisher("led_2", "boolean")
 # SPACEBREW EVENT HANDLERS
 # =========================
 
+def led_0(value):
+  print "LED0 : "
+  print value
+
 def led_1(value):
   print "LED1 : "
   print value
 
-def led_2(value):
-  print "LED2 : "
-  print value
-
-def button_1(value):
+def button_0(value):
   if value == 1:
     GPIO.output(24, GPIO.HIGH)
     time.sleep(.5)
     GPIO.output(24, GPIO.LOW)
  
-def button_2(value):
+def button_1(value):
   if value == 1:
     GPIO.output(25, GPIO.HIGH)
     time.sleep(.5)
@@ -97,8 +97,8 @@ def tweet_coffee(message):
 # ==========
 # Subscribe
 # ==========
+brew_array.subscribe("button_0", button_0);
 brew_array.subscribe("button_1", button_1);
-brew_array.subscribe("button_2", button_2);
 
 brew_array.start()
 
@@ -121,13 +121,13 @@ COUNT16OZ = 0
 
 while (True):
 
-  if GPIO.input(18) != led1:
+  if GPIO.input(18) != led0:
 
-    led1 = GPIO.input(18)
-    brew_array.publish("led_1", 1)
+    led0 = GPIO.input(18)
+    brew_array.publish("led_0", led1)
 
 
-  if GPIO.input(23) != led2:
+  if GPIO.input(23) != led1:
 
-    led2 = GPIO.input(23)
-    brew_array.publish("led_2", 1)
+    led1 = GPIO.input(23)
+    brew_array.publish("led_1", led2)
